@@ -1,23 +1,19 @@
-homepage := Some(url("https://github.com/miguno/akka-mock-scheduler"))
+homepage := Some(url("https://github.com/pjfanning/pekko-mock-scheduler"))
 
 licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html"))
 
-organization := "com.miguno.akka"
+organization := "com.github.pjfanning"
 
-name := "akka-mock-scheduler"
-
-resolvers ++= Seq(
-  "typesafe-repository" at "http://repo.typesafe.com/typesafe/releases/"
-)
+name := "pekko-mock-scheduler"
 
 
 // -------------------------------------------------------------------------------------------------------------------
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.5.23"
+val akkaVersion = "2.6.21"
 val javaVersion = "1.8"
-val mainScalaVersion = "2.13.0"
+val mainScalaVersion = "2.13.11"
 
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -26,8 +22,8 @@ val mainScalaVersion = "2.13.0"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-  "org.scalatest" %% "scalatest" % "3.0.8" % "test",
-  "org.mockito" % "mockito-all" % "1.10.19" % "test"
+  "org.scalatest" %% "scalatest" % "3.2.16" % Test,
+  "org.scalatestplus" %% "mockito-4-11" % "3.2.16.0" % Test
 )
 
 
@@ -35,11 +31,11 @@ libraryDependencies ++= Seq(
 // Compiler settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-crossScalaVersions := Seq(mainScalaVersion, "2.11.12", "2.12.8")
+crossScalaVersions := Seq(mainScalaVersion, "2.12.18", "3.3.0")
 
 scalaVersion := mainScalaVersion
 
-javacOptions in Compile ++= Seq(
+Compile / javacOptions ++= Seq(
   "-source", javaVersion,
   "-target", javaVersion,
   "-Xlint:unchecked",
@@ -50,7 +46,7 @@ scalacOptions ++= Seq(
   "-encoding", "UTF-8"
 )
 
-scalacOptions in Compile ++= Seq(
+Compile / scalacOptions ++= Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-feature",  // Emit warning and location for usages of features that should be imported explicitly.
   "-unchecked", // Enable additional warnings where generated code depends on assumptions.
@@ -61,7 +57,7 @@ scalacOptions in Compile ++= Seq(
   "-Ywarn-adapted-args" // Warn if an argument list is modified to match the receiver.
 ) else Seq())
 
-scalacOptions in Test ~= { (options: Seq[String]) =>
+Test / scalacOptions ~= { (options: Seq[String]) =>
   options.filterNot(_ == "-Ywarn-value-discard").filterNot(_ == "-Ywarn-dead-code" /* to fix warnings due to Mockito */)
 }
 
@@ -70,18 +66,7 @@ scalacOptions in Test ~= { (options: Seq[String]) =>
 // Sonatype settings
 // ---------------------------------------------------------------------------------------------------------------------
 
-// https://github.com/jodersky/sbt-gpg
-//
-// Note: As of v2.0.0 this is also supported by https://github.com/sbt/sbt-pgp.
-//       See https://github.com/sbt/sbt-pgp/issues/125.
-credentials += Credentials(
-  "GnuPG Key ID",
-  "gpg",
-  "5724DC6AAEC6D526992C234D07D42B2CB4799D71", // key identifier
-  "ignored" // this field is ignored; passwords are supplied by pinentry
-)
-
-sonatypeProfileName := "com.miguno"
+sonatypeProfileName := "com.github.pjfanning"
 
 publishMavenStyle := true
 
@@ -93,21 +78,26 @@ publishTo := {
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
-publishArtifact in Test := false
+Test / publishArtifact := false
 
 pomIncludeRepository := { _ => false }
 
 pomExtra := (
   <scm>
-    <connection>scm:git:git@github.com:miguno/akka-mock-scheduler.git</connection>
-    <developerConnection>scm:git:git@github.com:miguno/akka-mock-scheduler.git</developerConnection>
-    <url>git@github.com:miguno/akka-mock-scheduler.git</url>
+    <connection>scm:git:git@github.com:pjfanning/pekko-mock-scheduler.git</connection>
+    <developerConnection>scm:git:git@github.com:pjfanning/pekko-mock-scheduler.git</developerConnection>
+    <url>git@github.com:pjfanning/pekko-mock-scheduler.git</url>
   </scm>
   <developers>
     <developer>
       <id>miguno</id>
       <name>Michael G. Noll</name>
       <url>http://www.michael-noll.com/</url>
+    </developer>
+    <developer>
+      <id>pjfanning</id>
+      <name>PJ Fanning</name>
+      <url>https://github.com/pjfanning</url>
     </developer>
   </developers>)
 
@@ -117,7 +107,7 @@ pomExtra := (
 // ---------------------------------------------------------------------------------------------------------------------
 
 // Write test results to file in JUnit XML format
-testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/test-reports/junitxml")
+Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/test-reports/junitxml")
 
 // Write test results to console.
 //
@@ -132,4 +122,4 @@ testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-u", "target/te
 //        // test output to file and then run grep/awk/sed/etc. on it.
 //        testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oWUDT", "-eWUDT")
 //
-testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-o")
+Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-o")

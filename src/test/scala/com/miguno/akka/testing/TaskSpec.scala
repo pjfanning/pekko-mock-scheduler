@@ -1,11 +1,13 @@
 package com.miguno.akka.testing
 
 import org.scalatestplus.mockito.MockitoSugar
-import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
+import org.scalatest.GivenWhenThen
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration._
 
-class TaskSpec extends FunSpec with Matchers with GivenWhenThen with MockitoSugar {
+class TaskSpec extends AnyFunSpec with Matchers with GivenWhenThen with MockitoSugar {
 
   val runnable = new Runnable() {
     def run(): Unit = {}

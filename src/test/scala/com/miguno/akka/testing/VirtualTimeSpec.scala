@@ -1,10 +1,12 @@
 package com.miguno.akka.testing
 
-import org.scalatest.{FunSpec, GivenWhenThen, Matchers}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.GivenWhenThen
 
 import scala.concurrent.duration._
 
-class VirtualTimeSpec extends FunSpec with Matchers with GivenWhenThen {
+class VirtualTimeSpec extends AnyFunSpec with Matchers with GivenWhenThen {
 
   describe("VirtualTime") {
 
