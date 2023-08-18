@@ -1,8 +1,8 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
-import akka.actor.Cancellable
+import org.apache.pekko.actor.Cancellable
 
-private[testing] case class MockCancellable(scheduler: MockScheduler, task: Task) extends Cancellable {
+private[mock] case class MockCancellable(scheduler: MockScheduler, task: Task) extends Cancellable {
 
   private[this] var canceled: Boolean = false
 

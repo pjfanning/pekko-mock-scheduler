@@ -1,4 +1,4 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
 import java.util.concurrent.atomic.AtomicInteger
 import org.mockito.Mockito

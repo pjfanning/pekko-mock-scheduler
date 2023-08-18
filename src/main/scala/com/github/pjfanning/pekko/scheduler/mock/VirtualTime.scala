@@ -1,4 +1,4 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
 import java.util.concurrent.TimeUnit
 
@@ -7,10 +7,10 @@ import scala.concurrent.duration._
 class VirtualTime {
 
   /**
-    * There's a circular dependency between the states of [[com.miguno.akka.testing.MockScheduler]] and this class,
+    * There's a circular dependency between the states of [[MockScheduler]] and this class,
     * hence we use the same lock for both.
     */
-  private[testing] val lock = new Object
+  private[mock] val lock = new Object
 
   private[this] var elapsedTime: FiniteDuration = 0.millis
 

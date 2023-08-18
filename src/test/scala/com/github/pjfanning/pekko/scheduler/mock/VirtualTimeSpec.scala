@@ -1,4 +1,4 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers

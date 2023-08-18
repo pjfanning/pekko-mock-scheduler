@@ -1,4 +1,4 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
 import org.scalatestplus.mockito.MockitoSugar
 import org.scalatest.GivenWhenThen

@@ -11,7 +11,7 @@ name := "pekko-mock-scheduler"
 // Variables
 // -------------------------------------------------------------------------------------------------------------------
 
-val akkaVersion = "2.6.21"
+val pekkoVersion = "1.0.1"
 val javaVersion = "1.8"
 val mainScalaVersion = "2.13.11"
 
@@ -21,7 +21,7 @@ val mainScalaVersion = "2.13.11"
 // -------------------------------------------------------------------------------------------------------------------
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+  "org.apache.pekko" %% "pekko-actor" % pekkoVersion,
   "org.scalatest" %% "scalatest" % "3.2.16" % Test,
   "org.scalatestplus" %% "mockito-4-11" % "3.2.16.0" % Test
 )

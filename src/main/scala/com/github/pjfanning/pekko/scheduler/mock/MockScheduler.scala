@@ -1,6 +1,6 @@
-package com.miguno.akka.testing
+package com.github.pjfanning.pekko.scheduler.mock
 
-import akka.actor.{Cancellable, Scheduler}
+import org.apache.pekko.actor.{Cancellable, Scheduler}
 
 import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
@@ -58,7 +58,7 @@ class MockScheduler(time: VirtualTime) extends Scheduler {
       MockCancellable(this, task)
     }
 
-  private[testing] def cancelTask(task: Task): Unit = {
+  private[mock] def cancelTask(task: Task): Unit = {
     time.lock synchronized {
       tasks = tasks.filterNot { x => x.id == task.id }
     }
